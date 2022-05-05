@@ -1,0 +1,70 @@
+ \leadauthor{Sanderson}
+
+\title{Taxonium: a web-based tool for exploring very large phylogenies, and its application to the COVID-19 pandemic}
+\shorttitle{Taxonium}
+
+\author[1]{Theo Sanderson \orcidlink{0000-0003-4177-2851}}
+\affil[1]{The Francis Crick Institute, UK}
+
+\date{}
+
+\maketitle
+
+\begin{abstract}
+More genomes of the SARS-CoV-2 virus have been sequenced than any organism on earth. These sequences are most meaningful when laid out relative to one another in a phylogenetic tree, but at the start of the pandemic few tools existed to allow exploration of trees of millions of sequences. We have created Taxonium, a web-based tool for browsing very large trees. Taxonium allows users to see the mutations that occurred at each internal node of the tree, as well as metadata regarding lineages, sample dates, and locations. Taxonium can be run either entirely on the client-side of the user, allowing exploration of local trees without any risk of disclosure, or using a server-side backend that allows rapid loading even on lower-specification devices. Taxonium is an open-source library which can be applied to any large tree. We provide an application for exploring a public tree of more than 1.5 million SARS-CoV-2 sequences at http://Cov2Tree.org, and the source code to Taxonium is available at http://github.com/theosanderson/taxonium.
+
+\lipsum[1]
+\end{abstract}
+
+\begin{keywords}
+tree | visualisation | phylogenetics
+\end{keywords}
+
+\begin{corrauthor}
+theo.sanderson\at crick.ac.uk
+\end{corrauthor}
+
+\section*{Introduction}\label{s:introduction}
+
+Genomic researchers responded to the emergence of SARS-CoV-2 with rapid collaboration at unprecedented scale. Open protocols were quickly generated for amplicon sequencing [cite ARTIC] which have continued to be updated [V3, V4], and allowed researchers across the globe to produce an ever-growing genomic [cite GISAID, consider graph of growth], which has recently surpassed 10 million sequences. Importantly, new tools were also developed to understand the functional diversity of these samples, by assigning them into lineages proposed by the community [cite], and allowing interactive exploration of these data [cite Covariants, Covince, CovSpectrum, Outbreak info].
+
+The vast scale of these datasets has posed challenges for the array of tools that researchers had previously relied upon to manipulate, analyse, and visualise genomic data. In particular, the construction of phylogenetic trees, and the visualisation of these trees, has been a bottleneck in the analysis of SARS-CoV-2 genomic data. There are two broad responses possible to this issue. The first is to downsample the sequences analysed in order to create a smaller dataset with which existing tools are able to work efficiently, while maintaining much of the sequence diversity present. This has been an important approach, and has allowed NextStrain [cite] to provide one of the most used and most powerful tools for exploring SARS-CoV-2 genetic diversity. Briefly, the NextStrain pipeline downsamples sequences in a rational way, uses iqtree (Minh et al. 2020) to assemble them into a tree, calibrates this tree to time using treetime (Sagulenko et al. 2018), and displays the results in a user-friendly interactive interface using auspice [cite]. All three of these stages are bottlenecks which prevent the use of pre-pandemic approaches.
+
+The new scale of data available provides an impetus to develop new tools that are able to work with these datasets without downsampling. Recently the development of UShER (Turakhia et al. 2021) has permitted larger trees to be built than ever previously. UShER takes a starting tree, built with iqtree or a similar approach, and incrementally adds sequences by maximum parsimony. For densely sampled sequencing efforts, as in the SARS-CoV-2 pandemic, such an approach still yields tree topologies of very high quality. To turn this distance tree into a time tree, by estimating a time associated with each node in the tree, we developed Chronumental [cite] which uses stochastic gradient descent to efficiently construct chronologies from very large trees. A final necessary component is a tool for exploring these large trees, ideally in a browser.
+
+Here we describe Taxonium, a web-based tool for browsing very large trees. Taxonium allows users to explore the mutations that occurred at each internal node of a tree, to visualise metadata, and to search for nodes based on a variety of parameters. It is available in a server-backed mode, which allows exploration of all publicly available SARS-CoV-2 sequences in a few seconds, and also a fully client-side mode, suitable for exploring custom datasets potentially with sensitive data. Users can explore a tree of millions of SARS-CoV-2 sequences at http://cov2tree.org.
+
+
+\section*{Results}\label{s:results}
+
+\subsection*{The Taxonium Web Client}
+
+The Taxonium web client is a React application that permits the exploration of very large trees. It achieves this increase in scale by using WebGL [cite DeckGL] for efficient visualisation of the tree, and by rendering a sparsified version of the tree, depending on the zoom level in use to avoid unnecessary overplotting.
+
+The Taxonium web client can be used entirely client-side, without any interaction with a server, or it can be used in a server-backed mode, with the server providing the tree data, and the client visualising it. The server-backed mode is more efficient, as it does not require all data to be sent to the client, and the computationally expensive operations can be performed on a more powerful machine, but the client-side mode has the advantage that it can be used with custom data, and especially for data that may be sensitive and not suitable for uploading to a server. When used in client-side mode, these more expensive computational operations take place in a web worker, which ensures the main interface remains responsive.
+
+The user interface of the Taxonium web client is shown in Figure 1. The tree, at the left hand side of the screen, can be panned and zoomed, in vertical and horizontal axes separately.  A toggleable minimap is provided for orientation. The right hand panel allows users to search for nodes of interest and to select how the tree is coloured. It also displays information about the selected node, including the mutations that occured at it. Similar information is available upon hovering over a node of interest.
+
+\subsection*{The Taxonium Backend}
+
+The Taxonium backend is implemented in NodeJS using Express, which means that much of the same code can be used in the client when it is running in full client-side mode. We have made substantial efforts to make the backend as efficient as possible. Nodes are stored sorted on their y-coordinates, permitting a binary search to rapidly find the indices of nodes that are within a given range of y-coordinates, corresponding to the region on which the user has zoomed.
+
+
+\section*{Discussion}\label{s:discussion}
+
+This is the discussion section where you wax lyrical about your findings.
+You can put your work in the context of other published work \citep{brenner_uga:_1967}.
+
+
+
+\section*{Methods}\label{s:methods}
+
+\subsection*{Molecular biology}
+
+\subsection*{Cell biology}
+
+
+
+\section*{Bibliography}
+\bibliographystyle{bxv_abbrvnat}
+\bibliography{refs.bib}

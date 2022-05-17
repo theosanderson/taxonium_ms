@@ -1,74 +1,162 @@
-
-@article{watson_molecular_1953,
-	title = {Molecular structure of nucleic acids; a structure for deoxyribose nucleic acid},
-	volume = {171},
-	issn = {0028-0836},
-	doi = {10.1038/171737a0},
-	language = {eng},
-	number = {4356},
-	journal = {Nature},
-	author = {Watson, J. D. and Crick, F. H.},
-	month = apr,
-	year = {1953},
-	pmid = {13054692},
-	keywords = {Deoxyribose, Molecular Structure, Nucleic Acids, NUCLEIC ACIDS},
-	pages = {737--738}
+% 33972780 
+@Article{usher,
+   Author="Turakhia, Y.  and Thornlow, B.  and Hinrichs, A. S.  and De Maio, N.  and Gozashti, L.  and Lanfear, R.  and Haussler, D.  and Corbett-Detig, R. ",
+   Title="{{U}ltrafast {S}ample placement on {E}xisting t{R}ees ({U}{S}h{E}{R}) enables real-time phylogenetics for the {S}{A}{R}{S}-{C}o{V}-2 pandemic}",
+   Journal="Nat Genet",
+   Year="2021",
+   Volume="53",
+   Number="6",
+   Pages="809--816",
+   Month="06"
 }
 
-@article{brenner_uga:_1967,
-	title = {{UGA}: a third nonsense triplet in the genetic code},
-	volume = {213},
-	issn = {0028-0836},
-	shorttitle = {{UGA}},
-	doi = {10.1038/213449a0},
-	language = {eng},
-	number = {5075},
-	journal = {Nature},
-	author = {Brenner, S. and Barnett, L. and Katz, E. R. and Crick, F. H.},
-	month = feb,
-	year = {1967},
-	pmid = {6032223},
-	keywords = {Adenine, Chemical Phenomena, Chemistry, Coliphages, DNA, Genetic Code, Guanine, Hydroxylamines, Mutation, RNA, Messenger, Tryptophan, Uracil},
-	pages = {449--450}
+ @misc{hodcroft_2021, title={CoVariants: SARS-CoV-2 Mutations and Variants of Interest.}, author={Hodcroft, Emma B.}, year={2021}} 
+ 
+ @article{chen2022cov,
+  title={CoV-Spectrum: analysis of globally shared SARS-CoV-2 data to identify and characterize new variants},
+  author={Chen, Chaoran and Nadeau, Sarah and Yared, Michael and Voinov, Philippe and Xie, Ning and Roemer, Cornelius and Stadler, Tanja},
+  journal={Bioinformatics},
+  volume={38},
+  number={6},
+  pages={1735--1737},
+  year={2022},
+  publisher={Oxford University Press}
 }
 
-@book{alberts_molecular_2002,
-	address = {New York},
-	edition = {4th ed},
-	title = {Molecular biology of the cell},
-	isbn = {978-0-8153-3218-3 978-0-8153-4072-0},
-	publisher = {Garland Science},
-	editor = {Alberts, Bruce},
-	year = {2002},
-	keywords = {Cells, Molecular Biology, Cytology, Molecular biology}
+@article {chronumental,
+	author = {Sanderson, Theo},
+	title = {Chronumental: time tree estimation from very large phylogenies},
+	elocation-id = {2021.10.27.465994},
+	year = {2021},
+	doi = {10.1101/2021.10.27.465994},
+	publisher = {Cold Spring Harbor Laboratory},
+	abstract = {Phylogenetic trees are an important tool for interpreting sequenced genomes, and their interrelationships. Estimating the date associated with each node of such a phylogeny creates a {\textquotedblleft}time tree{\textquotedblright}, which can be especially useful for visualising and analysing evolution of organisms such as viruses. Several tools have been developed for time-tree estimation, but the sequencing explosion in response to the SARS-CoV-2 pandemic has created phylogenies so large as to prevent the application of these previous approaches to full datasets. Here we introduce Chronumental, a tool that can rapidly infer time trees from phylogenies featuring large numbers of nodes. Chronumental uses stochastic gradient descent to identify lengths of time for tree branches which maximise the evidence lower bound under a probabilistic model, implemented in a framework which can be compiled into XLA for rapid computation. We show that Chronumental scales to phylogenies featuring millions of nodes, with chronological predictions made in minutes, and is able to accurately predict the dates of nodes for which it is not provided with metadata.Competing Interest StatementThe authors have declared no competing interest.},
+	URL = {https://www.biorxiv.org/content/early/2021/10/28/2021.10.27.465994},
+	eprint = {https://www.biorxiv.org/content/early/2021/10/28/2021.10.27.465994.full.pdf},
+	journal = {bioRxiv}
 }
 
-@misc{zheng_genome_2011,
-	title = {Genome data from sweet and grain sorghum ({Sorghum} bicolor)},
-	url = {http://gigadb.org/dataset/100012},
-	abstract = {Sorghum is produced globally as a source of food, feed, fiber, and fuel.  Grain and sweet sorghums differ in a number of important traits including stem sugar and juice accumulation, plant height, and the production of grain and biomass.  The first sorghum whole-genome sequences are now available for analysis, but additional genomic sequences will be required to study genome-wide and intraspecific variation for dissecting the genetic basis of these important traits and for tailor-designed breeding of this important C4 crop.
 
-In a joint effort with scientists from the Institute of Botany of Chinese Academy of Sciences (Beijing) and Temasek Life Sciences Laboratory (Singapore), BGI resequenced two sweet and one grain sorghum inbred lines: E-Tian, Ji2731, and Keller.  E-Tian (literally meaning Russian Sweet in Chinese) is a sweet sorghum line introduced into China in the early 1970{\textquoteright}s. Ji2731 is a Chinese kaoliang grain sorghum that is well adapted to Northeast China.  Keller is an American-bred elite sweet sorghum line shown to perform well across a wide range of environmental conditions.
-
-Using the re-sequencing data, a set of nearly 1,500 genes differentiating sweet and grain sorghum were identified.  These genes fall into 10 major metabolic pathways involved in sugar and starch metabolisms, lignin and coumarin biosynthesis, nucleic acid metabolism, stress responses and DNA damage repair.  In addition, 1,057,018 SNPs, 99,948 indels of 1-10bp in length and 16,487 presence/absence variations were uncovered, and 17,111 CNVs were detected.  The majority of the SNPs, large-effect SNPs, indels and presence/absence variations resided in genes containing leucine rich repeats, PPR repeats and disease resistance R genes possessing diverse biological functions or under diversifying selection, but were absent in genes which are essential for life.
-
-This is the first publically available data that allows the identification of genome-wide patterns of genetic variation in sorghum.  The high-density SNP and indel markers presented here will be a valuable resource for future genotype and phenotype studies and the molecular breeding of this important crop and for related species.},
-	language = {eng},
-	urldate = {2019-10-07},
-	publisher = {GigaScience},
-	author = {Zheng, L-Y and Guo, X-S and He, B and Sun, L-J and Peng, Y and Dong, S-S and Liu, T-F and Jiang, S and Ramachandran, S and Liu, C-M and Jing, H-C},
-	year = {2011},
-	doi = {10.5524/100012},
-	note = {type: dataset},
-	keywords = {Genomic}
+@online{deckgl,
+  author={Uber},
+  title={deck.gl: WebGL2 powered geospatial visualization layers},
+  url={https://deck.gl/},
+  year={2016},
+  urldate={2020-05-29},
 }
 
-@article{tipton_complexities_2019,
-	title = {Complexities of {Microtubule} {Population} {Dynamics} within the {Mitotic} {Spindle}},
-	url = {https://www.biorxiv.org/content/early/2019/09/14/769752},
-	doi = {10.1101/769752},
-	abstract = {The mitotic spindle functions to move chromosomes to alignment at metaphase, then segregate sister chromatids during anaphase. Analysis of spindle microtubule kinetics utilizing fluorescence dissipation after photoactivation described two main populations, a slow and a fast turnover population, historically taken to reflect kinetochore versus non-kinetochore microtubules respectively. This two component demarcation seems likely oversimplified. Microtubule turnover may vary among different spindle microtubules, regulated by spatial distribution and interactions with other microtubules and with organelles such as kinetochores, chromosome arms, and the cell cortex. How turnover among various spindle microtubules is differentially regulated and its significance remains unclear. We tested the concept of kinetochore versus non-kinetochore microtubules by disrupting kinetochores through depletion of the Ndc80 complex. In the absence of functional kinetochores, microtubule dynamics still exhibited slow and fast turnover populations, though proportions and timings of turnover were altered. Importantly, the data obtained following Hec1/Ndc80 depletion suggests other sub-populations, in addition to kinetochore microtubules, contribute to the slow turnover population. Further manipulation of spindle microtubules revealed a complex landscape. Dissection of the dynamics of microtubule populations will provide a greater understanding of mitotic spindle kinetics and insight into roles in facilitating chromosome attachment, movement, and segregation during mitosis.},
-	journal = {bioRxiv},
-	author = {Tipton, Aaron R. and Gorbsky, Gary J.},
-	year = {2019}
+@article{Tyson2020,
+  doi = {10.1101/2020.09.04.283077},
+  url = {https://doi.org/10.1101/2020.09.04.283077},
+  year = {2020},
+  month = sep,
+  publisher = {Cold Spring Harbor Laboratory},
+  author = {John R Tyson and Phillip James and David Stoddart and Natalie Sparks and Arthur Wickenhagen and Grant Hall and Ji Hyun Choi and Hope Lapointe and Kimia Kamelian and Andrew D Smith and Natalie Prystajecky and Ian Goodfellow and Sam J Wilson and Richard Harrigan and Terrance P Snutch and Nicholas J Loman and Joshua Quick},
+  title = {Improvements to the {ARTIC} multiplex {PCR} method for {SARS}-{CoV}-2 genome sequencing using nanopore}
+}
+
+@article{shu2017gisaid,
+  title={GISAID: Global initiative on sharing all influenza data--from vision to reality},
+  author={Shu, Yuelong and McCauley, John},
+  journal={Eurosurveillance},
+  volume={22},
+  number={13},
+  pages={30494},
+  year={2017},
+  publisher={European Centre for Disease Prevention and Control}
+}
+
+@article{insdc,
+  title={The international nucleotide sequence database collaboration},
+  author={Cochrane, Guy and Karsch-Mizrachi, Ilene and Takagi, Toshihisa and Sequence Database Collaboration, International Nucleotide},
+  journal={Nucleic acids research},
+  volume={44},
+  number={D1},
+  pages={D48--D50},
+  year={2016},
+  publisher={Oxford University Press}
+}
+
+@article{rambaut2020dynamic,
+  title={A dynamic nomenclature proposal for SARS-CoV-2 lineages to assist genomic epidemiology},
+  author={Rambaut, Andrew and Holmes, Edward C and O’Toole, {\'A}ine and Hill, Verity and McCrone, John T and Ruis, Christopher and du Plessis, Louis and Pybus, Oliver G},
+  journal={Nature microbiology},
+  volume={5},
+  number={11},
+  pages={1403--1407},
+  year={2020},
+  publisher={Nature Publishing Group}
+}
+
+@article{o2021assignment,
+  title={Assignment of epidemiological lineages in an emerging pandemic using the pangolin tool},
+  author={O’Toole, {\'A}ine and Scher, Emily and Underwood, Anthony and Jackson, Ben and Hill, Verity and McCrone, John T and Colquhoun, Rachel and Ruis, Chris and Abu-Dahab, Khalil and Taylor, Ben and others},
+  journal={Virus Evolution},
+  volume={7},
+  number={2},
+  pages={veab064},
+  year={2021},
+  publisher={Oxford University Press UK}
+}
+
+@article {outbreakinfo,
+	author = {Tsueng, Ginger and Mullen, Julia and Alkuzweny, Manar and Cano, Marco and Rush, Benjamin and Haag, Emily and Outbreak Curators and Latif, Alaa Abdel and Zhou, Xinghua and Qian, Zhongchao and Andersen, Kristian G. and Wu, Chunlei and Su, Andrew I. and Gangavarapu, Karthik and Hughes, Laura D.},
+	title = {Outbreak.info: A standardized, searchable platform to discover and explore COVID-19 resources and data},
+	elocation-id = {2022.01.20.477133},
+	year = {2022},
+	doi = {10.1101/2022.01.20.477133},
+	publisher = {Cold Spring Harbor Laboratory},
+	abstract = {To combat the ongoing COVID-19 pandemic, scientists have been conducting research at breakneck speeds, producing over 52,000 peer reviewed articles within the first 12 months. In contrast, a little over 1,000 peer reviewed articles were published within the first 12 months of the SARS-CoV-1 pandemic starting in 2002. In addition to publications, there has also been an upsurge in clinical trials to develop vaccines and treatments, scientific protocols to study SARS-CoV-2, methodology for epidemiological modeling, and datasets spanning molecular studies to social science research. One of the largest challenges has been keeping track of the vast amounts of newly generated disparate data and research that exist in independent repositories. To address this issue, we developed outbreak.info, which provides a standardized, searchable interface of heterogeneous data resources on COVID-19 and SARS-CoV-2. Unifying metadata from 14 data repositories, we have assembled a collection of over 200,000 publications, clinical trials, datasets, protocols, and other resources as of October 2021. We used a rigorous schema to enforce a consistent format across different data sources and resource types, and linked related resources where possible. This enables users to quickly retrieve information across data repositories, regardless of resource type or repository location. Outbreak.info also combines the combined research library with spatiotemporal genomics data on SARS-CoV-2 variants and epidemiological data on COVID-19 cases and deaths. The web interface provides interactive visualizations and reports to explore the unified data and generate hypotheses. In addition to providing a web interface, we also publish the data we have assembled and standardized in a high performance public API and an R package. Finally, we discuss the challenges inherent in combining metadata from scattered and heterogeneous resources and provide recommendations to streamline this process to aid scientific research.Competing Interest StatementThe authors have declared no competing interest.},
+	URL = {https://www.biorxiv.org/content/early/2022/01/21/2022.01.20.477133},
+	eprint = {https://www.biorxiv.org/content/early/2022/01/21/2022.01.20.477133.full.pdf},
+	journal = {bioRxiv}
+}
+
+
+@article{nextstrain,
+    author = {Hadfield, James and Megill, Colin and Bell, Sidney M and Huddleston, John and Potter, Barney and Callender, Charlton and Sagulenko, Pavel and Bedford, Trevor and Neher, Richard A},
+    title = "{Nextstrain: real-time tracking of pathogen evolution}",
+    journal = {Bioinformatics},
+    volume = {34},
+    number = {23},
+    pages = {4121-4123},
+    year = {2018},
+    month = {05},
+    abstract = "{Understanding the spread and evolution of pathogens is important for effective public health measures and surveillance. Nextstrain consists of a database of viral genomes, a bioinformatics pipeline for phylodynamics analysis, and an interactive visualization platform. Together these present a real-time view into the evolution and spread of a range of viral pathogens of high public health importance. The visualization integrates sequence data with other data types such as geographic information, serology, or host species. Nextstrain compiles our current understanding into a single accessible location, open to health professionals, epidemiologists, virologists and the public alike.All code (predominantly JavaScript and Python) is freely available from github.com/nextstrain and the web-application is available at nextstrain.org.}",
+    issn = {1367-4803},
+    doi = {10.1093/bioinformatics/bty407},
+    url = {https://doi.org/10.1093/bioinformatics/bty407},
+    eprint = {https://academic.oup.com/bioinformatics/article-pdf/34/23/4121/26676762/bty407.pdf},
+}
+
+
+@article{iqtree,
+  title={IQ-TREE 2: new models and efficient methods for phylogenetic inference in the genomic era},
+  author={Minh, Bui Quang and Schmidt, Heiko A and Chernomor, Olga and Schrempf, Dominik and Woodhams, Michael D and Von Haeseler, Arndt and Lanfear, Robert},
+  journal={Molecular biology and evolution},
+  volume={37},
+  number={5},
+  pages={1530--1534},
+  year={2020},
+  publisher={Oxford University Press}
+}
+
+
+@article{treetime,
+  title={TreeTime: Maximum-likelihood phylodynamic analysis},
+  author={Sagulenko, Pavel and Puller, Vadim and Neher, Richard A},
+  journal={Virus evolution},
+  volume={4},
+  number={1},
+  pages={vex042},
+  year={2018},
+  publisher={Oxford University Press}
+}
+
+@article{matutils,
+  title={matutils: Tools to interpret and manipulate mutation annotated trees},
+  author={McBroome, Jakob and Thornlow, Bryan and Hinrichs, Angie S and De Maio, Nicola and Goldman, Nick and Haussler, David and Corbett-Detig, Russell and Turakhia, Yatish},
+  journal={bioRxiv},
+  year={2021},
+  publisher={Cold Spring Harbor Laboratory Preprints}
 }

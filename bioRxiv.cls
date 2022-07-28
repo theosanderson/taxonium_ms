@@ -252,9 +252,9 @@
   []
 \titleformat{\subsubsection}[runin]
   {\sffamily\small\bfseries\itshape}
-  {\thesubsubsection.}
+  {\thesubsubsection \\ }
   {0.5em}
-  {#1. }
+  {#1 \\ }
   []
 \titleformat{\paragraph}[runin]
   {\sffamily\small\bfseries}

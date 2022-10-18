@@ -58,7 +58,7 @@ Here we describe Taxonium, a web-based tool for for analysing and exploring larg
 
 \subsection*{The Taxonium web client allows exploration of million-node phylogenies in the browser}
 
-To allow interactive examination of very large phylogenies, we built the Taxonium web client, a React application available at \href{http://taxonium.org}{taxonium.org}. One major bottleneck for previous approaches was the use of web technologies involving SVG or Canvas to visualize the tree, which have performance limitations. We instead use WebGL, a web standard that allows a computer's GPU to display web graphics, for efficient visualisation of the tree -- we implement this using DeckGL \citep{deckgl}. Even so, rendering every node in the tree would still be too slow, and would involve hundreds of nodes overplotted on each pixel when a tree was zoomed out. We address this by rendering a sparsified version of the tree, with the sparsification dependent on the zoom level such that only nodes that overlap other nodes are excluded (see Materials & Methods). This approach allows for fast and responsive tree exploration.
+To allow interactive examination of very large phylogenies, we built the Taxonium web client, a React application available at \href{http://taxonium.org}{taxonium.org}. One major bottleneck for previous approaches was the use of web technologies involving SVG or Canvas to visualize the tree, which have performance limitations. We instead use WebGL, a web standard that allows a computer's GPU to display web graphics, for efficient visualisation of the tree -- we implement this using DeckGL \citep{deckgl}. Even so, rendering every node in the tree would still be too slow, and would involve hundreds of nodes overplotted on each pixel when a tree was zoomed out. We address this by rendering a sparsified version of the tree, with the sparsification dependent on the zoom level such that only nodes that overlap other nodes are excluded (see Materials \& Methods). This approach allows for fast and responsive tree exploration.
 
 The input to Taxonium is a tree (e.g. in Newick format) and, optionally, metadata. Metadata is associated with each node of the tree, and the tree can be coloured by any chosen metadata item. Colours are by default selected using an algorithm that hashes the metadata's string value into a unique colour, ensuring consistency over time without the need for comprehensive look-up tables. In addition, the tree can be searched based on the metadata, with identified nodes circled. Complex hierarchical boolean combination queries using AND, OR, or NOT  are supported.
 
@@ -96,7 +96,7 @@ The client-side only version of Taxonium is highly responsive, and permits loadi
 
 The Taxonium backend is implemented in NodeJS using Express. It runs from the same codebase that runs in the web worker in the browser. We made substantial efforts to make this backend code as efficient as possible. Nodes are stored sorted by their y coordinates, meaning that two binary searches can be used to identify the slice of nodes that lie within a supplied window.
 
-\subsection*{The Taxonium desktop application allows loading very large trees}
+\subsection*{The Taxonium desktop application enables local loading of particularly large trees}
 
 Like most other tools for tree exploration, Taxonium stores data on nodes in random-access memory (RAM). Most computers now have 8 GB or more of RAM, which is sufficient to store data from a very large tree. However memory limits in the browser can be significantly lower than the total system memory, and efficiency of storage can depend on the specific web browser, which can limit the size of trees which can be loaded locally in the Taxonium web client to \textasciitilde{}6M terminal nodes on some systems. This could be avoided by manually starting an instance of the Taxonium backend, but this would be a difficult procedure for non-expert users. In response to this issue, we built the Taxonium Desktop App.
 
@@ -177,7 +177,7 @@ One challenge in this new era of vast datasets is the variable quality of sequen
 
 Even where sequences are accurate, phylogenetic topology is often uncertain, and finding ways to communicate this at scale, building on prior work \citep{densitree} would be useful. A further challenge is the vastly different densities of sampling in different geographic regions. Because Taxonium does not downsample sequences from countries which are able to sequence a greater proportion of their cases, the number of tips in a particular region of the tree is not always indicative of the size of an outbreak, and in some cases even inferences of the directionality of migration may be confounded. There would be value in the development of techniques that allow visual normalisation of trees for sampling biases, which might allow for less biased phylogenetic representations without downsampling.
 
-Taxonium is an ongoing open source project to create and maintain a tree viewer able to scale to the latest phylogenies. It forms part of an ecosystem of open-source tools that together turn an avalanche of sequencing data into actionable insights into ongoing  evolution. We welcome contributions from the community and hope that the features described here will be useful to those working on epidemiological surveillance and outbreak response.
+Taxonium is an ongoing project to create and maintain a tree viewer able to scale to the latest phylogenies. It forms part of an ecosystem of open-source tools that together turn an avalanche of sequencing data into actionable insights into ongoing  evolution. We welcome contributions from the community and hope that the features described here will be useful to those working on epidemiological surveillance and outbreak response.
 
 \clearpage{}
 \section*{Materials and methods}
@@ -261,7 +261,9 @@ The code for Taxonium is available at \url{https://github.com/theosanderson/taxo
 
 Phylogenetic analysis of viral genomes is only possible thanks to a community of researchers and clinicians who take viral samples, generate genomes, and submit to sequence databases such as the INSDC databases and GISAID, and I am very grateful to all contributors. I am indebted to Richard Goater for development advice and to Angie Hinrichs for maintenance of the underlying tree that powers Cov2Tree. This preprint uses a \href{https://github.com/roylelab/manuscript-templates}{LaTeX template} from the Royle Lab, which in turn was forked from a template by Ricardo Henriques.
 
-This work was supported by the Wellcome Trust (210918/Z/18/Z) and the Francis Crick Institute which receives its core funding from Cancer Research UK (FC001043), the UK Medical Research (FC001043) Council, and the Wellcome Trust (FC001043).
+This work was supported by the Wellcome Trust (210918/Z/18/Z) and the Francis Crick Institute which receives its core funding from Cancer Research UK (FC001043), the UK Medical Research Council (FC001043), and the Wellcome Trust (FC001043).
+
+This research was funded in whole, or in part, by the Wellcome Trust []210918/Z/18/Z, FC001043]. For the purpose of Open Access, the author has applied a CC BY public copyright licence to any Author Accepted Manuscript version arising from this submission.·
 
 
 \subsection*{Conflicts of interests}

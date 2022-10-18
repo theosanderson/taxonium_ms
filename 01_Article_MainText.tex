@@ -11,7 +11,7 @@
 \maketitle
 
 \begin{abstract}
-The COVID-19 pandemic has resulted in a step change in the scale of sequencing data, with more genomes of SARS-CoV-2 having been sequenced than any other organism on earth. These sequences reveal key insights when represented as a phylogenetic tree, which captures the evolutionary history of the virus, and allows the identification of transmission events and the emergence of new variants. However, existing web-based tools for analysing and exploring phylogenies do not scale to the size of datasets now available for SARS-CoV-2. We have developed Taxonium, a new tool that uses WebGL to allow the exploration of trees with tens of millions of nodes in the browser for the first time. Taxonium links each node to associated metadata and supports mutation-annotated trees, which are able to capture all known genetic variation in a dataset. We describe insights that analysing a tree of five million sequences can provide into SARS-CoV-2 evolution, and provide an application at \href{http://cov2tree.org}{cov2tree.org} for exploring a public tree of more than five million SARS-CoV-2 sequences. Taxonium can be applied to any tree, and is available at \href{http://taxonium.org}{taxonium.org}, with source code at \href{https://github.com/theosanderson/taxonium}{github.com/theosanderson/taxonium}.
+The COVID-19 pandemic has resulted in a step change in the scale of sequencing data, with more genomes of SARS-CoV-2 having been sequenced than any other organism on earth. These sequences reveal key insights when represented as a phylogenetic tree, which captures the evolutionary history of the virus, and allows the identification of transmission events and the emergence of new variants. However, existing web-based tools for exploring phylogenies do not scale to the size of datasets now available for SARS-CoV-2. We have developed Taxonium, a new tool that uses WebGL to allow the exploration of trees with tens of millions of nodes in the browser for the first time. Taxonium links each node to associated metadata and supports mutation-annotated trees, which are able to capture all known genetic variation in a dataset. It can either be run entirely locally in the browser, from a server-based backend, or as a desktop application.  We describe insights that analysing a tree of five million sequences can provide into SARS-CoV-2 evolution, and provide a tool at \href{http://cov2tree.org}{cov2tree.org} for exploring a public tree of more than five million SARS-CoV-2 sequences. Taxonium can be applied to any tree, and is available at \href{http://taxonium.org}{taxonium.org}, with source code at \href{https://github.com/theosanderson/taxonium}{github.com/theosanderson/taxonium}.
 
 
 \end{abstract}
@@ -35,14 +35,14 @@ Genomic researchers responded to the emergence of SARS-CoV-2 with rapid collabor
 \label{fig:taxonium_client}
 \end{figure}
 
-The fundamental representation of an epidemic for genomic epidemiology is a phylogenetic tree, which for RNA viruses closely approximates the transmission tree of the viral epidemic and allows the direction of migration of viral lineages to be understood \citep{pmid27501264}. When trees are annotated with the mutations that have occurred at each internal node, they capture information about parallel and convergent evolution, which can identify recurrent mutations of concern.
+The fundamental representation of a viral epidemic for genomic epidemiology is a phylogenetic tree, which approximates the transmission tree and can allow insights into the direction of migration of viral lineages \citep{pmid27501264}. When trees are annotated with the mutations that have occurred at each internal node, they capture information about parallel and convergent evolution, which can identify recurrent mutations of concern.
 
-The unparalleled size of SARS-CoV-2 datasets has posed challenges for the array of tools that researchers have previously relied upon to manipulate, analyse, and visualise genomic data. In particular, the construction of phylogenetic trees, and the visualisation of these trees, have been major bottlenecks preventing full-scale analyses. There are two broad responses possible to this issue. One is to downsample the sequences analysed in order to create a smaller dataset with which existing tools are able to work efficiently. This has been an important approach, and has allowed NextStrain \citep{nextstrain} to provide one of the most widely-used and important tools for exploring SARS-CoV-2 genetic diversity. Briefly, the NextStrain pipeline downsamples sequences in a rational way, and then uses iqtree \citep{iqtree} to assemble them into a tree, assigns chronology and ancestral states to this tree using TreeTime \citep{treetime}, and displays the results in a user-friendly interactive interface using Auspice \citep{nextstrain}. All three of these post-downsampling stages are bottlenecks which prevent the use of full datasets, and so NextStrain analyses are typically limited to \textasciitilde4,000 nodes -- sampled in a structured way to ensure they either provide an overview of the pandemic or hone in on particular sequences of interest.
+The unparalleled size of SARS-CoV-2 datasets has posed challenges for the array of tools that researchers have previously relied upon to manipulate, analyse, and visualise genomic data. In particular, the construction of phylogenetic trees, and the visualisation of these trees, have been major bottlenecks preventing full-scale analyses. There are two broad responses possible to this issue. One is to downsample the sequences analysed in order to create a smaller dataset with which existing tools are able to work efficiently. This has been an important approach, and has allowed NextStrain \citep{nextstrain} to provide one of the most widely-used and important tools for exploring SARS-CoV-2 genetic diversity. Briefly, the NextStrain pipeline downsamples sequences in a rational way, and then uses iqtree \citep{iqtree} to assemble them into a tree, assigns chronology and ancestral states to this tree using TreeTime \citep{treetime}, and displays the results in a user-friendly interactive interface using Auspice \citep{nextstrain}. All three of these post-downsampling stages are bottlenecks which prevent the use of full datasets, and so NextStrain analyses are typically limited to \textasciitilde4,000 sequences -- sampled in a structured way to ensure they either provide an overview of the pandemic or hone in on particular sequences of interest.
 
 
 The new scale of data available provides an impetus to develop new tools that are able to operate on these large datasets directly without downsampling. Recently the development of UShER \citep{usher} has permitted larger trees to be built than ever previously. UShER takes a starting tree, built with iqtree or a similar approach, and incrementally adds sequences by maximum parsimony. For densely sampled sequencing efforts, as in the SARS-CoV-2 pandemic, such an approach still yields tree topologies of very high quality \citep{Thornlow2021.12.02.471004}. To turn this distance tree into a time tree, by estimating a time associated with each node in the tree, we recently developed Chronumental \citep{chronumental} which uses stochastic gradient descent to efficiently construct chronologies from very large trees, which was not possible with previous approaches. A final necessary component is a tool for exploring these large trees, ideally in a browser.
 
-Here we describe Taxonium, a web-based tool for for analysing and exploring large trees. Taxonium scales to trees with millions of nodes, and allows for rapid panning and zooming using WebGL. In addition to reading Newick format trees, Taxonium can also display UShER mutation-annotated trees which capture genotype information in mutations at internal nodes. It permits searching for nodes by metadata or genotype, and a range of annotation options. Taxonium is available in a server-backed mode, which in a matter of seconds loads to allow exploration of all publicly available SARS-CoV-2 sequences, and also a fully client-side mode suitable for exploring custom datasets, including those with sensitive data.
+Here we describe Taxonium, a web-based tool for for analysing and exploring large trees. Taxonium scales to trees with millions of nodes, and allows for rapid panning and zooming using WebGL. In addition to reading Newick format trees, Taxonium can also display UShER mutation-annotated trees which capture genotype information in mutations at internal branches. It permits searching for nodes by metadata or genotype, and a range of annotation options. Taxonium is available in a server-backed mode, which in a matter of seconds loads to allow exploration of all publicly available SARS-CoV-2 sequences, and also a fully client-side mode suitable for exploring custom datasets, including those with sensitive data.
 
 
 \section*{Results}\label{s:results}
@@ -52,13 +52,13 @@ Here we describe Taxonium, a web-based tool for for analysing and exploring larg
 \begin{center}
 \includegraphics[width=\linewidth]{Figures/TaxoniumFlowChart.pdf}
 \end{center}
-\caption{\textbf{Components of the Taxonium project.} At the core of Taxonium is a graphical interface that runs in the web browser. It can connect either to a web-worker running in the same browser (for purely local use) or to an API web-server that serves parts of the tree on demand. Trees can be loaded from Newick format files with metadata TSVs, or from a specialised Taxonium JSONL format which is able to capture mutation-annotated trees. Taxonium JSONLs can be produced using the Taxoniumtools library.}
+\caption{\textbf{Components of the Taxonium project.} At the core of Taxonium is a graphical interface that runs in the web browser. It can connect either to a web-worker running in the same browser (for purely local use) or to an API web-server that serves parts of the tree on demand. Trees can be loaded from Newick format files with metadata TSVs (tab-separated value files), or from a specialised Taxonium JSONL (JSON-lines) format which is able to capture mutation-annotated trees. Taxonium JSONLs can be produced using the Taxoniumtools library.}
 \label{fig:flowchart}
 \end{figure}
 
 \subsection*{The Taxonium web client allows exploration of million-node phylogenies in the browser}
 
-To address the need for analysis of very large phylogenies, we built the Taxonium web client, a React application available at \href{http://taxonium.org}{taxonium.org}. One major bottleneck for previous approaches was the use of web technologies involving SVG or Canvas to visualize the tree, which have performance limitations. We instead use WebGL, as implemented via DeckGL \citep{deckgl}, for efficient visualisation of the tree. Even so, rendering every node in the tree would still be too slow, and would involve hundreds of nodes overplotted on each pixel when a tree was zoomed out. We address this by rendering a sparsified version of the tree, with the sparsification dependent on the zoom level such that only nodes that would be hidden by other nodes are excluded. This approach allows for fast and responsive tree exploration.
+To allow interactive examination of very large phylogenies, we built the Taxonium web client, a React application available at \href{http://taxonium.org}{taxonium.org}. One major bottleneck for previous approaches was the use of web technologies involving SVG or Canvas to visualize the tree, which have performance limitations. We instead use WebGL, a web standard that allows a computer's GPU to display web graphics, for efficient visualisation of the tree -- we implement this using DeckGL \citep{deckgl}. Even so, rendering every node in the tree would still be too slow, and would involve hundreds of nodes overplotted on each pixel when a tree was zoomed out. We address this by rendering a sparsified version of the tree, with the sparsification dependent on the zoom level such that only nodes that overlap other nodes are excluded (see Materials & Methods). This approach allows for fast and responsive tree exploration.
 
 The input to Taxonium is a tree (e.g. in Newick format) and, optionally, metadata. Metadata is associated with each node of the tree, and the tree can be coloured by any chosen metadata item. Colours are by default selected using an algorithm that hashes the metadata's string value into a unique colour, ensuring consistency over time without the need for comprehensive look-up tables. In addition, the tree can be searched based on the metadata, with identified nodes circled. Complex hierarchical boolean combination queries using AND, OR, or NOT  are supported.
 
@@ -74,7 +74,7 @@ The user interface of the Taxonium web client is shown in \cref{fig:taxonium_cli
 
 
 
-In addition to accepting traditional trees, Taxonium also supports mutation annotated trees (MATs, \citet{matutils}), generated by UShER, where internal nodes are annotated with mutations inferred to have occurred at that point in the phylogeny (\cref{fig:flowchart}). Since an MAT essentially captures the full sequence of each sample in the tree, its use as an input permits the user to colour the tree by genotype at any desired site (\cref{fig:681}), or alternatively to search for particular mutations in internal modes (\cref{fig:452}), and to filter by how many leaf nodes these mutations gave rise to.
+In addition to accepting traditional trees, Taxonium also supports mutation annotated trees (MATs, \citet{matutils}), generated by UShER, where internal nodes are annotated with mutations inferred to have occurred at that branch of the phylogeny (\cref{fig:flowchart}). Since an MAT essentially captures the full sequence of each sample in the tree, its use as an input permits the user to colour the tree by genotype at any desired site (\cref{fig:681}), or alternatively to search for particular mutations in internal modes (\cref{fig:452}), and to filter by how many terminal nodes these mutations gave rise to.
 
 
 
@@ -96,9 +96,18 @@ The client-side only version of Taxonium is highly responsive, and permits loadi
 
 The Taxonium backend is implemented in NodeJS using Express. It runs from the same codebase that runs in the web worker in the browser. We made substantial efforts to make this backend code as efficient as possible. Nodes are stored sorted by their y coordinates, meaning that two binary searches can be used to identify the slice of nodes that lie within a supplied window.
 
+\subsection*{The Taxonium desktop application allows loading very large trees}
+
+Like most other tools for tree exploration, Taxonium stores data on nodes in random-access memory (RAM). Most computers now have 8 GB or more of RAM, which is sufficient to store data from a very large tree. However memory limits in the browser can be significantly lower than the total system memory, and efficiency of storage can depend on the specific web browser, which can limit the size of trees which can be loaded locally in the Taxonium web client to \textasciitilde{}6M terminal nodes on some systems. This could be avoided by manually starting an instance of the Taxonium backend, but this would be a difficult procedure for non-expert users. In response to this issue, we built the Taxonium Desktop App.
+
+The app is developed using Electron\footnote{\url{https://www.electronjs.org/}} and is available in binary format for MacOS, Linux, and Windows. It automatically starts an instance of the backend using a packaged version of NodeJS, 
+which can use as much system memory as is available, and then starts a client to connect to this backend, running in Chromium. We were able to use the Taxonium Desktop App to explore a mutation-annotated phylogeny of 12.5M sequences and metadata on a laptop with 8 GB of RAM.
+
+
+
 \subsection*{User-friendly tooling for tree generation}
 
-We provide a simple Python application, \texttt{taxoniumtools}, which allows straightforward generation of a Taxonium JSONL file from an UShER MAT. The Taxonium JSONL format combines tree topology, node metadata, and mutations, in a row-wise format. The tree's structure is encoded only in the \texttt{parent\_id} property of each node.
+We provide a simple Python package, \texttt{taxoniumtools}, which allows straightforward generation of a Taxonium JSONL file from an UShER MAT or a Newick tree using the command-line. The Taxonium JSONL format combines tree topology, node metadata, and mutations, in a row-wise format. The tree's structure is encoded only in the \texttt{parent\_id} property of each node.
 
 Taxoniumtools uses TreeSwift \citep{moshiri2020treeswift} for rapid loading of the Newick string located within the UShER MAT file. Optionally it can run Chronumental \citep{chronumental} as part of the building process and integrate the resulting time tree into the final JSONL file.
 
@@ -112,7 +121,7 @@ Cov2Tree is based on the daily-updated UShER tree built by \cite{McBroome2021}, 
 
 We run a backend server that supports the Cov2Tree application, meaning that the user needs only to load the data for the region of the tree on which they have zoomed in. This helps to enable analysis in lower bandwidth settings. Users can colour the tree by PANGO lineage, by sample country, or by genotype, and use searches to conduct complex queries.
 
-The application of Taxonium to global SARS-CoV-2 datasets provides important insights into the evolution of the virus. Taxonium is the only tool that readily displays the number of independent times a given mutation has occurred during viral evolution, and the lineages in which these mutations evolved. This can be a key analytical approach to understand evolutionary processes such as epistasis. For example, Taxonium reveals a very heavy enrichment for occurrences of S:452M/S:452Q are within the BA.2 lineage (Figure 3), providing evidence of epistatic interactions between this position and BA.2 defining mutations. Similar effects are seen at S:212 \footnote{See \href{https://cov2tree.org/?srch=\%5B\%7B\%22key\%22\%3A\%22aa1\%22\%2C\%22type\%22\%3A\%22mutation\%22\%2C\%22method\%22\%3A\%22mutation\%22\%2C\%22text\%22\%3A\%22\%22\%2C\%22gene\%22\%3A\%22S\%22\%2C\%22position\%22\%3A\%22212\%22\%2C\%22new_residue\%22\%3A\%22any\%22\%2C\%22min_tips\%22\%3A\%2210\%22\%7D\%5D&color=\%7B\%22field\%22\%3A\%22None\%22\%7D}{this tree}}.
+The application of Taxonium to global SARS-CoV-2 datasets provides important insights into the evolution of the virus. Taxonium readily displays the number of independent times a given mutation has occurred during viral evolution, and the lineages in which these mutations evolved. This can be a key analytical approach to understand evolutionary processes such as epistasis. For example, Taxonium reveals a very heavy enrichment for occurrences of S:452M/S:452Q are within the BA.2 lineage (Figure 3), providing evidence of epistatic interactions between this position and BA.2 defining mutations. Similar effects are seen at S:212 \footnote{See \href{https://cov2tree.org/?srch=\%5B\%7B\%22key\%22\%3A\%22aa1\%22\%2C\%22type\%22\%3A\%22mutation\%22\%2C\%22method\%22\%3A\%22mutation\%22\%2C\%22text\%22\%3A\%22\%22\%2C\%22gene\%22\%3A\%22S\%22\%2C\%22position\%22\%3A\%22212\%22\%2C\%22new_residue\%22\%3A\%22any\%22\%2C\%22min_tips\%22\%3A\%2210\%22\%7D\%5D&color=\%7B\%22field\%22\%3A\%22None\%22\%7D}{this tree}}.
 
 Taxonium has also been used  to probe  regional introduction events and transmission clusters during the SARS-CoV-2 pandemic \citep{mcbroome2022identifying}, to identify a convergent origin for two sets of mutations which each create a new ORF \citep{Mears2022}, and to examine new tools for pandemic-scale tree reconstruction \citep{DeMaio2022}.
 
@@ -123,7 +132,7 @@ Taxonium has also been used  to probe  regional introduction events and transmis
 We have used Taxonium to create a tool that allows exploration of the NCBI Taxonomy database \citep{federhen2012ncbi}. The resulting visualisation, which can be found at \href{http://taxonomy.taxonium.org}{taxonomy.taxonium.org}, allows interactive viewing of the taxonomic relationships between 2.2 million species, as well as searches.
 
 
-We have also collaborated with the Serratus project \citep{edgar2022petabase} to allow visualisation of trees of virus sequences identified in a search of petabases of sequence from the Sequence Read Archive. Each viral order and family at \href{http://serratus.io/trees}{serratus.io/trees} now provides an option to open a custom Taxonium tree.
+We have also collaborated with the Serratus project \citep{edgar2022petabase} to allow visualisation of trees of viral RdRP sequences identified in a search of petabases of reads from the Sequence Read Archive. Each viral order and family at \href{http://serratus.io/trees}{serratus.io/trees} now provides an option to open a custom Taxonium tree.
 
 With the arrival of the 2022 monkeypox outbreak in Europe, we launched \href{http://mpx.taxonium.org}{mpx.taxonium.org} to allow exploration of an open genomic dataset from LAPIS \citep{lapis}.
 
@@ -149,10 +158,10 @@ Archaeopteryx \citep{archaeopteryx} took >5 minutes to load this tree with stack
 
 We attempted to load the same file on Microreact.org \citep{argimon2016microreact} (which now uses Phylocanvas.GL), but the screen locked up and had not loaded within a reasonable time. A Phylocanvas.GL demo \footnote{\url{https://www.phylocanvas.gl/examples/very-large-tree.html}} does show that the library \citep{abudahab2021phylocanvas} is able to load a SARS-CoV-2 tree with >1M leaves, panning relatively slowly on our hardware.
 
-We found it difficult to evaluate the performance of Dendroscope: we were able to open this file -- for which we increased its allotted RAM to 5 GB. The tree loaded in 1 minute and 23 seconds. However it rendered as a single black rectangle which only began to resolve upon zooming in substantially, making it difficult to extract insights about the tree. Dendroscope used all available RAM whereas Taxonium used 1.7 GB. In general, Taxonium felt substantially more responsive.
+We found it difficult to evaluate the performance of Dendroscope \citep{pmid18034891}: we were able to open this file -- for which we increased its allotted RAM to 5 GB. The tree loaded in 1 minute and 23 seconds. However it rendered as a single black rectangle which only began to resolve upon zooming in substantially, making it difficult to extract insights about the tree. Dendroscope used all available RAM whereas Taxonium used 1.7 GB. In general, Taxonium felt substantially more responsive.
 
 
-It must be noted that all these tools have different feature sets. Many of the tools above allow for features absent from Taxonium, such as re-rooting, displaying trees radially, collapsing subtrees, and more. Support for these features to an extent trades-off against scale. Conversely, Taxonium is unique among these tools in supporting mutation-annotated trees, and perhaps in its ability to toggle to a time tree -- features shared with, and inspired by, Auspice \citep{nextstrain} -- which is limited to phylogenies of <\textasciitilde10,000 nodes (around 0.2\% of  Taxonium scale). In sum, we argue that Taxonium is the only tool able to fluidly explore the largest trees in current use on consumer-grade hardware.
+It must be noted that all these tools have different feature sets. Many of the tools above allow for features absent from Taxonium, such as re-rooting, displaying trees radially, collapsing subtrees, and more. Support for these features to an extent trades-off against scale. Conversely, Taxonium is unique among these tools in supporting mutation-annotated trees, and perhaps in its ability to toggle to a time tree -- features shared with, and inspired by, Auspice \citep{nextstrain} -- which is limited to phylogenies of <\textasciitilde10,000 tips (around 0.2\% of  Taxonium scale). In sum, we argue that Taxonium is the only tool able to fluidly explore the largest trees in current use on consumer-grade hardware.
 
 
 
@@ -162,11 +171,13 @@ The increased scale of recent genomic datasets has prevented existing tools from
 
 Taxonium allows exploration of these large phylogenies, and is also one of few tools to allow the visualisation of a mutation-annotated tree capturing all known sequence diversity in an organism. It is open-source and highly configurable for use with any tree. We have used Taxonium to build the Cov2Tree website, which has been widely used to explore the global diversity of SARS-CoV-2.
 
-Some tools for phylogenetic trees are designed primarily for generating static figures suited for publications. These may offer features Taxonium lacks, such as the ability to visualise phylogenies in a circular layout, and the ability to output vector graphics. In contrast, Taxonium is intended primarily for exploring a tree dynamically -- in the case of very large trees, this often the only way to extract useful information.
+Some tools for phylogenetic trees are designed primarily for generating static figures suited for publications. These may offer features Taxonium lacks, such as the ability to visualise phylogenies in a circular layout, and the ability to output vector graphics. In contrast, Taxonium is intended primarily for exploring a tree dynamically -- in the case of very large trees, this is often the only way to extract useful information.
 
-One challenge in this new era of vast datasets is the variable quality of sequences, and therefore resultant phylogenies. Artifacts in sequences (e.g. \citet{pmid35130474,sanderson2021variation,sanderson2021systematic}) are often systematic, and in such cases can create entire clades brought together by shared errors. Existing efforts to tackle these issues have been important, for example pooling knowledge of known sites of common spurious mutations \citep{de2020masking}. The development of new pipelines and assemblers that minimize artifacts will be important in the future, and the development of tree-building algorithms that are able to consider the possibility of variation due to artifacts, or pre-tree masking steps that mask different sites in each sequence, may be valuable. Widespread deposition of raw reads would allow systematic assembly by pipelines designed to minimise systematic errors. In Taxonium we provide a search option that highlights ``revertant'' mutations in which a branch apparently mutates back towards the reference genome. In large SARS-CoV-2 phylogenies, many of these mutations appear to in fact represent sequencing artifacts, or reversion from them, and so this approach may help identify areas of a tree that may have technical issues. 
+One challenge in this new era of vast datasets is the variable quality of sequences, and therefore resultant phylogenies. Artifacts in sequences (e.g. \citet{pmid35130474,sanderson2021variation,sanderson2021systematic}) are often systematic, and in such cases can create entire clades brought together by shared errors. Existing efforts to tackle these issues have been important, for example pooling knowledge of known sites of common spurious mutations \citep{de2020masking}. The development of new pipelines and assemblers that minimize artifacts will be important in the future, and the development of tree-building algorithms that are able to consider the possibility of variation due to artifacts, or pre-tree masking steps that mask different sites in each sequence, may be valuable. Widespread deposition of raw reads would allow systematic assembly by pipelines designed to minimise errors. In Taxonium we provide a search option that highlights ``revertant'' mutations in which a branch apparently mutates back towards the reference genome. In large SARS-CoV-2 phylogenies, many of these mutations appear to in fact represent sequencing artifacts, or reversion from them, and so this approach may help identify areas of a tree that  have technical issues. 
 
-Taxonium is an ongoing open source project to create and maintain a tree viewer able to scale to the latest phylogenies. We welcome contributions from the community and hope that the features described here will be useful to those working on epidemiological surveillance and outbreak response.
+Even where sequences are accurate, phylogenetic topology is often uncertain, and finding ways to communicate this at scale, building on prior work \citep{densitree} would be useful. A further challenge is the vastly different densities of sampling in different geographic regions. Because Taxonium does not downsample sequences from countries which are able to sequence a greater proportion of their cases, the number of tips in a particular region of the tree is not always indicative of the size of an outbreak, and in some cases even inferences of the directionality of migration may be confounded. There would be value in the development of techniques that allow visual normalisation of trees for sampling biases, which might allow for less biased phylogenetic representations without downsampling.
+
+Taxonium is an ongoing open source project to create and maintain a tree viewer able to scale to the latest phylogenies. It forms part of an ecosystem of open-source tools that together turn an avalanche of sequencing data into actionable insights into ongoing  evolution. We welcome contributions from the community and hope that the features described here will be useful to those working on epidemiological surveillance and outbreak response.
 
 \clearpage{}
 \section*{Materials and methods}
@@ -177,19 +188,61 @@ In order to be able to share trees through a web application, we present data at
 \subsection*{The Taxonium web client}
 The Taxonium web client is implemented in React. All source code is available at \url{https://github.com/theosanderson/taxonium/tree/master/taxonium_web_client}. The core of the visualisation runs in DeckGL, which is heavily modified to allow independent zooming in X and Y. The data consumed by DeckGL is generated either in a web worker (local mode) or in from an external API running the Taxonium backend (remote mode).
 
-In either case, the key endpoint provides a sparsified tree, computed by cutting the tree to a region just larger than the bounding box of the user's current page, then filtering out nodes that overlie one another, and then adding all ancestral nodes of those selected to ensure that the tree returned is a pruned version of the full tree. Outputting a full pruned tree means that the genotypes of all terminal nodes can be computed by traversing the mutations associated with each node.
+In either case, the key endpoint provides a sparsified tree, a pruned version focused on nodes in the currently visible region, with overlying nodes reduced (see \textit{Reducing overplotting} below). Outputting a full pruned tree means that the genotypes of all terminal nodes can be computed by traversing the mutations associated with each node.
 
 The returned dataset includes all metadata for each included node, meaning that users can select any item to colour nodes by, or alternatively can colour nodes by genotype.
 
-Alternatively the \emph{Search} endpoint allows users to search across the whole dataset, with nodes matching the search circled in the interface. The same filtering strategy is applied to the results of search, meaning that even searches that return millions of results can be interacted with fluidly.
+Alternatively the \emph{Search} endpoint allows users to search across the whole dataset, with nodes matching the search circled in the interface.
 
-Taxonium is capable of storing two different distant metrics in the same tree, allowing users to switch between the genetic distance and the temporal phylogeny. 
+Taxonium is capable of storing two different distance metrics in the same tree, allowing users to switch between the genetic distance and the temporal phylogeny. 
+
+
 
 
 \subsection*{Taxonium backend}
-The Taxonium backend is implemented in NodeJS in an Express-based framework. Full source code is available at \url{https://github.com/theosanderson/taxonium/tree/master/taxonium_backend}. The core code for filtering and searching that runs in the web-worker for the front-end is reused through a shared package, \emph{taxonium\_data\_handling}.
+The Taxonium backend is implemented in NodeJS in an Express\footnote{\url{https://expressjs.com/}}-based framework. Full source code is available at \url{https://github.com/theosanderson/taxonium/tree/master/taxonium_backend}. The core code for filtering and searching that runs in the web-worker for the front-end is reused through a shared package, \emph{taxonium\_data\_handling}.
 
-The backend keeps the full tree in memory, then serves filtered slices of it to users on demand. In the case of the SARS-CoV-2 dataset, the server backend requires around 5 GB of RAM per server instance. We run Cov2Tree on an autoscaling Kubernetes cluster.
+The backend keeps the full tree in memory, then serves filtered slices of it to users on demand. In the case of the SARS-CoV-2 dataset, the server backend requires around 5 GB of RAM per server instance. We run Cov2Tree on an autoscaling Kubernetes\footnote{\url{http://k8s.io}} cluster.
+
+
+\subsection*{Reducing overplotting}
+\subsubsection*{Nodes}
+
+To minimise both the overhead for displaying data in DeckGL, and the amount of data that needs to be transferred from a backend to the client, it is necessary to filter the tree so that we do not aim to draw every single node. Drawing every single node is unnecessary given that a tree with 5M terminal nodes contains more nodes than there are pixels available on a typical screen, meaning that many nodes lie on top of one another. Therefore we aim to filter out some of these overlying nodes while ensuring that the user sees essentially the same tree that they would have done without filtering.
+
+When the user zooms to a particular region of the tree, we create a bounding box, which is a little larger than the area visible on the screen. We then calculate a "precision" value for the X and Y axes, which is a value $<1$, inversely proportional of the dimensions of the bounding box in X and Y, so that as the bounding box targets a smaller area the precision value increases. We initially select all the nodes which are within the bounding box, and then filter down overlying nodes, using the following approach which is designed to be as streamlined as possible to minimise computational work:
+
+\begin{itemize}
+ \item Create a variable to store already-included  positions (which are indexed as\\ \texttt{included\_points[rounded\_x][rounded\_y]})
+    \item Iterate over nodes
+    \begin{itemize}
+    \item For each node calculate a "rounded position", with an x-value of \texttt{Math.round(node.x * precisionX) / precisionX)} and the corresponding y-value.
+    \item If this rounded position is \textit{not} among the already-included positions then:
+    \begin{itemize}
+    \item include this node in the output
+    \item add this node to the already-included positions
+    
+    
+    \end{itemize}
+    
+    \end{itemize}
+\end{itemize}
+
+Finally we add any missing parents of any included nodes to the output, so that the output is a valid pruned tree.
+
+\subsubsection*{Search}
+
+In order to ensure that search results are always comprehensive, but at the same time to avoid overplotting, we take the following approach:
+
+\begin{itemize}
+   
+\item Searches are performed across every single node on the tree to identify a set of nodes that match the search. The total number of matches is displayed in the client.
+\item If fewer than 10,000 matches are detected, these are simply directly displayed in the client as circles
+\item If more than 10,000 matches are detected, the results are first sparsified using the same method described above for nodes, and then displayed. 
+\item Upon zooming or panning, the sparsification is repeated for the new bounding box.
+\end{itemize}
+
+
 
 \subsection*{Taxoniumtools and tree processing}
 The \emph{taxoniumtools} package is written in Python and distributed with PyPI. Tree manipulation is performed with TreeSwift \citep{moshiri2020treeswift}. The package includes the ability to number internal nodes, with a numbering scheme that matches UShER newick exports. An optional feature, used for display on Cov2Tree, "shears" off outlier nodes with very few descendants, which often represent sequencing errors or occasionally recombinants. This pruning can help to make large trees more interpretable.
